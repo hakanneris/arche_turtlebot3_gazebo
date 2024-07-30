@@ -2,8 +2,7 @@ name: Build and Push Docker Image
 
 on:
   release:
-    types: 
-      - created
+    types: [created]
 
 jobs:
   build-and-push:
@@ -20,9 +19,8 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
-          username: hakanneris
-          password: ${{ secrets.SECRET_NEW }}
-          
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_PAT }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
